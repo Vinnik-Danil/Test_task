@@ -1,6 +1,7 @@
 import { LightningElement, track, wire } from 'lwc';
 import taskData from '@salesforce/apex/DragAndDropComponentHandler.getAllTask';
 import updateTask from '@salesforce/apex/DragAndDropComponentHandler.updateTask';
+import deleteTask from '@salesforce/apex/DragAndDropComponentHandler.deleteTask';
 
 export default class DragAndDropComponent extends LightningElement {
     @track taskNewList = [];
@@ -22,7 +23,6 @@ export default class DragAndDropComponent extends LightningElement {
                 task.Id = result[i].Id;
                 task.Subject = result[i].Subject;
                 task.Status = result[i].Status;
-                task.Description = result[i].Description;
                 if(task.Status === 'Not Started'){
                     taskNewData.push(task);
                 }else if(task.Status !== 'Not Started' && task.Status !== 'Completed'){
@@ -37,8 +37,13 @@ export default class DragAndDropComponent extends LightningElement {
         });
     }
 
+    handleClick(event){ //button delete;
+        this.deleteTaskStatus(this.dropTaskId);
+    }
+
     taskDragStart(event){
         const taskId = event.target.id.substr(0,18);
+        console.log(taskId);
         //window.alert(taskId);
         this.dropTaskId = taskId;
         let draggableElement = this.template.querySelector('[data-id="' + taskId + '"]');
@@ -75,9 +80,14 @@ export default class DragAndDropComponent extends LightningElement {
 
     handleDragOver(event){
         event.preventDefault();
-        // this.cancel(event);
-        // let draggableElement = this.template.querySelector('[data-role="drop-target"]');
-        // draggableElement.classList.add('over');
+    }
+
+    deleteTaskStatus(taskId){
+        alert("Are you sure? ");
+        deleteTask({newTaskId: taskId}).then(result =>{
+            this.getTaskData();
+        });
+        console.log("Record is deleted");
     }
 
     updateTaskStatus(taskId, taskNewStatus){
@@ -91,5 +101,4 @@ export default class DragAndDropComponent extends LightningElement {
         if (event.preventDefault) event.preventDefault();
         return false;
     };
-
 }

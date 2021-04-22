@@ -2,7 +2,7 @@ public with sharing class DragAndDropComponentHandler {
     @AuraEnabled
     public static List<Task> getAllTask(){
         Id loggedInUserId = UserInfo.getUserId();
-        return [SELECT Id, Owner.Name, Subject, Status, Description from Task];
+        return [SELECT Id, Subject, Status FROM Task];
         // return [SELECT Id, Name,Type,AccountNumber
         //         FROM Account
         //         Limit 2];
@@ -12,5 +12,11 @@ public with sharing class DragAndDropComponentHandler {
     public static void updateTask(Id newTaskId, String newStatus){
         Task updateTask = new Task(Id = newTaskId, Status = newStatus);
         Database.update(updateTask);
+    }
+
+    @AuraEnabled
+    public static void deleteTask(Id newTaskId){
+        Task deleteTask = new Task(Id = newTaskId);
+        Database.delete(deleteTask);
     }
 }

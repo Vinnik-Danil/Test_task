@@ -20,3 +20,6 @@
 .wrap{
     padding-bottom: 100px;
 }
+.cont{
+    display: flex;
+}
