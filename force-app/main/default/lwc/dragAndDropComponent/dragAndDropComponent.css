@@ -3,8 +3,6 @@
     margin: 10px 0 20px 0;
 }
 .custom-box {
-    
-    text-align: center;
     background-color: #f4f6f9;
     padding: 1rem;
     border: 1px solid #d8dde6;
@@ -22,4 +20,24 @@
 }
 .cont{
     display: flex;
+}
+.info_left{
+    display: flex;
+    width: 200px;
+    background-color: #f4f6f9;
+}
+.info_left h1{
+    font-size: 20px;
+    margin-left: 10px;
+    align-self: center;
+}
+.card{
+    border-radius: 5px;
+    border: 1px solid #d8dde6;
+    box-shadow: 1px 1px 3px 1px rgb(175, 175, 175);
+    display: flex;
+    height: 100px;
+    background-color: #f4f6f9;
+    align-items: center;
+    padding-left: 50px;
 }
