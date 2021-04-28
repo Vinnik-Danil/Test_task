@@ -48,6 +48,7 @@ export default class DragAndDropComponent extends LightningElement {
         this.dropTaskId = taskId;
         let draggableElement = this.template.querySelector('[data-id="' + taskId + '"]');
         draggableElement.classList.add('drag');
+        console.log("Its'WORK");
     }
 
     taskDragEnd(event){
